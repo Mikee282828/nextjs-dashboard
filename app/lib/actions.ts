@@ -2,6 +2,7 @@
 import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
+import { redirect } from 'next/navigation';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -29,4 +30,5 @@ export async function createInvoice(formData: FormData) {
   // Since you're updating the data displayed in the invoices route, you want to clear this
   // cache and trigger a new request to the server. You can do this with the revalidatePath function from Next.js
   revalidatePath("/dashboard/invoices");
+  redirect('/dashboard/invoices');
 }
