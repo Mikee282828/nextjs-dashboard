@@ -11,11 +11,9 @@ import { fetchRevenue } from '@/app/lib/data';
 // https://airbnb.io/visx/
 
 export default async function RevenueChart() {
-
   const revenue = await fetchRevenue();
   const chartHeight = 350;
-
-
+ // NOTE: Uncomment this code in Chapter 7
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
   if (!revenue || revenue.length === 0) {
