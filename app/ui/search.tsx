@@ -2,11 +2,24 @@
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { log } from 'console';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 export default function Search({ placeholder }: { placeholder: string }) {
 
+  const searchParams = useSearchParams(); // Allows you to access the parameters of the current URL
+  const pathname = usePathname();         // Allows you to access the path
+  const { replace } = useRouter();        //  Enables navigation between routes within client components programmatically
+  
   function handleSearch(term: string){
-    console.log(term);
+    const params = new URLSearchParams(searchParams);   // URLSearchParams is a Web API that provides utility methods for manipulating the URL query parameters.
+    
+    if(term){
+      params.set('query',term);
+    }else{
+      params.delete('query');
+    }
+
+    replace(`${pathname}?${params.toString()}`);
   }
 
   return (
