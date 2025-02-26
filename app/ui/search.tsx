@@ -14,6 +14,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     console.log(`Searching... ${term}`);
 
     const params = new URLSearchParams(searchParams); // URLSearchParams is a Web API that provides utility methods for manipulating the URL query parameters.
+    params.set('page', '1');
     if (term) {
       params.set("query", term);
     } else {
