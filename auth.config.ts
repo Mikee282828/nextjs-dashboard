@@ -2,7 +2,7 @@ import type { NextAuthConfig } from 'next-auth';
  
 export const authConfig = {
   pages: {
-    signIn: '/login',
+    signIn: '/login',    // quando l'user deve loggare è reindirizzato a questo percorso (es entrare in /dashboard)
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
@@ -14,7 +14,7 @@ export const authConfig = {
       } else if (isLoggedIn) {
         return Response.redirect(new URL('/dashboard', nextUrl));
       }
-      return true;
+      return true;    // se l'user non è loggato e non è in /dashboard allora permetti la rotta
     },
   },
   providers: [], // Add providers with an empty array for now
